@@ -96,4 +96,4 @@ sudo iptables -A PORTSCAN -m recent --name portscan --update --seconds 3 --hitco
 ![](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study/Pictures%20for%20Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study.md/screen_9_snort_logs.PNG)
 
 ## PART 4 "Main conclusions"
-I appreciate the implementation of this scenario, because it provides a hands-on experience that I can apply in my future position as a cybersecurity analyst. Thanks for reading!!!:smile:
+I appreciate the implementation of this scenario, because it provides a hands-on experience that I can apply in my future position as a cybersecurity analyst. Thanks for reading!!! :smile:
