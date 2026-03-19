@@ -50,7 +50,7 @@ Here you can see that we use wordlist: passwords.txt which located in a Desktop.
 
 Let’s check windows logs in event viewer and then understand how did this happen. We need to check Event ID 4624, because this Event ID is responsible for successful authentication (mark: attack we started at 10:34:44, so we need to check successful logs starting from this time):
 
-![](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study/Pictures%20for%20Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study.md/screen_5.PNG)
+![](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study/Pictures%20for%20Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study.md/upd.PNG)
 
 Here we can see that at 10:34:45 we found a password. Because at this time we successfully authenticated to a system.
 Let’s check Event ID 4625, this Event ID is responsible for failed authentication.
