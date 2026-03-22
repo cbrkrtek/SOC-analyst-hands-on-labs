@@ -1,15 +1,23 @@
 # :shield: Hybrid Attack Simulation & Log Correlation Study
 
-## Scenario
-There are signals of suspicious activity in the company. They say that someone is conducting attacks inside the network, trying to gain unauthorized access and intercept credentials through Kerberoasting. As a security specialist, you need to conduct "training" attacks in order to be able to track them in the logs, just as a real attacker would do.
+## :clipboard: Executive summary
+This project represents a comprehensive Detection Engineering exercise focused on the end-to-end analysis of modern attack vectors in a Windows Active Directory environment.
 
+As a **Future SOC Analyst**, my objective was to bridge the gap between offensive actions and defensive visibility. I simulated real-world adversarial techniques—ranging from network reconnaissance to credential harvesting—to identify the specific telemetry and log artifacts they leave behind.
+
+## :dart: Project Goals:
+ * **Visibility Assessment** Evaluate how effectively Advanced Audit Policies on Windows Server 2019 capture unauthorized access attempts.
+ * **Signature Validation:** Verify the detection capabilities of Snort IDS against network-level reconnaissance and scanning patterns.
+ * **Log Correlation:** Map offensive Tactics, Techniques, and Procedures (TTPs) to specific Event IDs (e.g., 4625, 4769) for future SIEM rule development.
 
 ## Virtual Machines
 * **10.0.0.21** — Ubuntu 22.04: Installed Wireshark and auxiliary utilities for attacks and scanning: Nmap, Hydra, Impacket. ***Attacker's host***
 * **10.0.1.254** — Ubuntu 22.04: With Snort and iptables installed. ***Victim's host***
 * **10.0.0.10** — Windows Server 2019: AD domain controller, DNS. ***Victim's host***
+> **Note to the Reader:**
+ Below is a detailed technical walkthrough of the investigation, including attack execution, log analysis, and analyst observations.
 
-## Setting up logging
+## Pre-configuring the victim's host
 First, you need to configure logging on the victim's computer to see all the hacker's attacks.
 
 ![](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study/Pictures%20for%20Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study.md/screen_1.PNG)
@@ -95,5 +103,14 @@ sudo iptables -A PORTSCAN -m recent --name portscan --update --seconds 3 --hitco
 
 ![](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study/Pictures%20for%20Hybrid%20Attack%20Simulation%20%26%20Log%20Correlation%20Study.md/screen_9_snort_logs.PNG)
 
-## PART 4 "Main conclusions"
-I appreciate the implementation of this scenario, because it provides a hands-on experience that I can apply in my future position as a cybersecurity analyst. Thanks for reading!!! :smile:
+## :checkered_flag: Conclusion & Security Recommendations
+This lab demonstrated that while default logging captures basic interactions, Advanced Audit Policies are essential for detecting sophisticated attacks like Kerberoasting. By correlating network alerts from Snort with host-based Windows Event Logs, I achieved full visibility of the attack lifecycle—from initial reconnaissance to credential access.
+### Key Takeaways for SOC Operations:
+* **Log Fidelity:** Standard logging is often insufficient. Enabling sub-categories (e.g., Audit Kerberos Service Ticket Operations) is critical for identifying TGS requests (Event ID 4769)
+* **Defense in Depth:** A multi-layered approach is necessary. Snort successfully identified the "noisy" port scanning phase, while Windows Logs were the primary source for detecting "silent" credential attacks.
+* **False Positives:** During the lab, I observed that legitimate administrative activity can sometimes mimic brute-force patterns. Baseline establishment is required to tune alert thresholds.
+## :shield: Recomended hardering measures
+    1) Implements SIEM Rules: Create correlation rules to trigger high-priority alerts when Event ID 4625 (Failed Logon) exceeds 10 attempts within 1 minute from a single source.
+    2) Kerberos Hardening: Transition to AES encryption for Kerberos tickets to mitigate the risk of offline cracking (RC4 is highly vulnerable).
+    3) Network Segmentation: Further restrict traffic between the workstation and DC subnets to only essential ports (LDAP, Kerberos, DNS), reducing the attack surface for port scanning.
+    
