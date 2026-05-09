@@ -47,7 +47,7 @@ Adversaries often use `"Run"` keys to maintain access after a reboot. I performe
 2. **Event Log Analysis**
 
 Monitoring for new service installations is a critical detection strategy. By filtering the System log for **Event ID 7045**, I discovered an unauthorized service.
-* **Service Name:** `yandex_hacker`
+* **Service Name:** `hacker`
 * **Service File Name:** `c:\tools\script.bat`
 
 ![Identifying the malicious service installation in Event Viewer.](https://github.com/cbrkrtek/SOC-analyst-hands-on-labs/blob/main/Windows%20Persistence%20%26%20Incident%20Response%20Hands-on%20Lab/Pictures/picture_3.PNG))
@@ -76,7 +76,7 @@ Once the threat was validated, I executed a remediation plan to contain the inci
 
 2. **Eradication:** Removed the persistence mechanisms (Registry key and Windows Service):
 
-`sc delete yandex_hacker`
+`sc delete hacker`
 
 3. **Recovery:** Deleted the malicious artifacts (`nc.exe`, `script.bat`) from the filesystem:
 
