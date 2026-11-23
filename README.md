@@ -1,2 +1,2 @@
 # SOC-analyst-hands-on-labs
-Hands-on projects in Security Operations Center (SOC) workflows: event triage, monitoring techniques, incident response, and investigation. Features data visualization with DataLens.
+Hands-on projects in Security Operations Center (SOC) workflows: event triage, monitoring techniques, incident response, and investigation.
